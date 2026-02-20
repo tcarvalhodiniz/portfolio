@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfólio | Thiago Diniz</title>
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect x='3' y='18' width='6' height='11' rx='1' fill='%233b82f6'/><rect x='13' y='10' width='6' height='19' rx='1' fill='%238b5cf6'/><rect x='23' y='3' width='6' height='26' rx='1' fill='%2310b981'/></svg>">
+
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LEEMJXEL0W"></script>
     <script>
@@ -14,53 +17,640 @@
         gtag('config', 'G-LEEMJXEL0W');
     </script>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-card: #ffffff;
+            --accent: #3b82f6;
+            --accent-hover: #2563eb;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-dark: #334155;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1);
+        }
+
+        html { scroll-behavior: smooth; }
+
         body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f3f2f1;
-            color: #333;
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9;
+            color: var(--text-dark);
+            line-height: 1.6;
         }
-        header {
-            background-color: #24292e;
-            color: white;
-            padding: 2rem;
-            text-align: center;
+
+        /* ── Navigation ── */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            transition: box-shadow 0.3s;
         }
-        h1 { margin: 0; font-size: 2.5rem; }
-        p { color: #8b949e; font-size: 1.2rem; margin-top: 10px; }
-        .container {
+
+        nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.3); }
+
+        .nav-inner {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
         }
-        .dashboard-container {
-            background: white;
-            padding: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+
+        .nav-logo {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-logo span { color: var(--accent); }
+
+        .nav-links { display: flex; gap: 0.25rem; }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--text-primary);
+            background: rgba(255,255,255,0.08);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.25rem;
+        }
+
+        /* ── Hero ── */
+        .hero {
+            background: var(--bg-primary);
+            padding: 10rem 2rem 5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(ellipse at 20% 50%, rgba(59,130,246,0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 50%, rgba(139,92,246,0.06) 0%, transparent 50%);
+        }
+
+        .hero-content {
+            position: relative;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+        }
+
+        .hero .subtitle {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            margin-top: 1rem;
+            font-weight: 400;
+        }
+
+        .hero-tags {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-tag {
+            background: rgba(59,130,246,0.1);
+            color: var(--accent);
+            border: 1px solid rgba(59,130,246,0.2);
+            padding: 0.4rem 1rem;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* ── Sections ── */
+        .section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .section-number {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--accent);
+            background: rgba(59,130,246,0.08);
+            padding: 0.3rem 0.75rem;
+            border-radius: 100px;
+            letter-spacing: 0.05em;
+        }
+
+        .section-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--bg-primary);
+            letter-spacing: -0.02em;
+        }
+
+        .section-desc {
+            color: var(--text-muted);
+            font-size: 1rem;
+            max-width: 600px;
+            margin-bottom: 2.5rem;
+        }
+
+        /* ── Dashboard Card ── */
+        .dashboard-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            transition: box-shadow 0.3s;
+        }
+
+        .dashboard-card:hover { box-shadow: var(--shadow-lg); }
+
+        .dashboard-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .dashboard-card-info {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .dashboard-icon {
+            width: 36px;
+            height: 36px;
+            background: rgba(59,130,246,0.1);
             border-radius: 8px;
-            height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
         }
-        iframe {
+
+        .dashboard-card-title {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--bg-primary);
+        }
+
+        .dashboard-card-sub {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .tech-badge {
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .tech-powerbi { background: #fff3cd; color: #856404; }
+        .tech-python { background: #d1ecf1; color: #0c5460; }
+
+        .dashboard-frame {
+            height: 75vh;
+            min-height: 500px;
+        }
+
+        .dashboard-frame iframe {
             width: 100%;
             height: 100%;
             border: none;
+            display: block;
+        }
+
+        /* ── WIP Cards ── */
+        .wip-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .wip-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: box-shadow 0.3s, transform 0.3s;
+        }
+
+        .wip-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+        }
+
+        .wip-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), #8b5cf6);
+            opacity: 0.6;
+        }
+
+        .wip-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #d97706;
+            background: #fef3c7;
+            padding: 0.3rem 0.7rem;
+            border-radius: 100px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+
+        .wip-badge::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: #d97706;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .wip-card h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--bg-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .wip-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .wip-tags {
+            display: flex;
+            gap: 0.4rem;
+            margin-top: 1.25rem;
+            flex-wrap: wrap;
+        }
+
+        .wip-tag {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            background: #f1f5f9;
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        /* ── Footer ── */
+        footer {
+            background: var(--bg-primary);
+            color: var(--text-secondary);
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 2rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover { color: var(--text-primary); }
+
+        .footer-copy {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            .hero { padding: 8rem 1.5rem 3rem; }
+            .hero h1 { font-size: 2rem; }
+            .hero .subtitle { font-size: 1rem; }
+            .section { padding: 3rem 1rem; }
+            .section-title { font-size: 1.35rem; }
+            .dashboard-frame { height: 60vh; min-height: 350px; }
+            .wip-grid { grid-template-columns: 1fr; }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 64px;
+                left: 0;
+                right: 0;
+                background: rgba(15, 23, 42, 0.98);
+                flex-direction: column;
+                padding: 1rem;
+                border-bottom: 1px solid rgba(255,255,255,0.05);
+            }
+
+            .nav-links.open { display: flex; }
+            .menu-toggle { display: block; }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Thiago Corrêa Carvalho Diniz</h1>
-        <p>Pós-graduando em AI Scientist | Data Analytics Portfolio</p>
-    </header>
-
-    <div class="container">
-        <div class="dashboard-container">
-            <iframe title="teste_publicar" src="https://app.powerbi.com/view?r=eyJrIjoiNzIwZTliMTktNTYzOC00MGQyLWIzMzQtM2NkN2U4NTllNzQ2IiwidCI6IjI3YWE3NWQ0LWUyNjktNGVmMC04NDAyLTAxYTMxNTEyMDc4ZSJ9" frameborder="0" allowFullScreen="true"></iframe>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-inner">
+            <a href="#" class="nav-logo">TD <span>|</span> Data & AI</a>
+            <div class="nav-links" id="navLinks">
+                <a href="#dashboards">Dashboards</a>
+                <a href="#analises">Análises</a>
+                <a href="#modelos">Data Science</a>
+                <a href="#automacao">AI & Automação</a>
+                <a href="#contato">Contato</a>
+            </div>
+            <button class="menu-toggle" id="menuToggle" aria-label="Menu">&#9776;</button>
         </div>
-    </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Thiago Corrêa Carvalho Diniz</h1>
+            <p class="subtitle">Pós-graduando em AI Scientist | Data Analytics Portfolio</p>
+            <div class="hero-tags">
+                <span class="hero-tag">AI First</span>
+                <span class="hero-tag">Power BI</span>
+                <span class="hero-tag">Python</span>
+                <span class="hero-tag">Machine Learning</span>
+                <span class="hero-tag">SQL</span>
+                <span class="hero-tag">n8n</span>
+                <span class="hero-tag">Cursor AI</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboards -->
+    <section class="section" id="dashboards">
+        <div class="section-header">
+            <span class="section-number">01</span>
+            <h2 class="section-title">Dashboards</h2>
+        </div>
+        <p class="section-desc">Painéis interativos construídos para transformar dados em decisões estratégicas.</p>
+
+        <div class="dashboard-card">
+            <div class="dashboard-card-header">
+                <div class="dashboard-card-info">
+                    <div class="dashboard-icon">📊</div>
+                    <div>
+                        <div class="dashboard-card-title">Dashboard de Ações</div>
+                        <div class="dashboard-card-sub">Análise do mercado financeiro</div>
+                    </div>
+                </div>
+                <span class="tech-badge tech-powerbi">Power BI</span>
+            </div>
+            <div class="dashboard-frame">
+                <iframe
+                    title="Dashboard_Acoes"
+                    src="https://app.powerbi.com/view?r=eyJrIjoiNzA1NjYyZDQtYjNkNi00ZGNiLTg2NDAtMWEyZTU1YmNiMTBhIiwidCI6IjI3YWE3NWQ0LWUyNjktNGVmMC04NDAyLTAxYTMxNTEyMDc4ZSJ9"
+                    frameborder="0"
+                    allowFullScreen="true">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Análises -->
+    <section class="section" id="analises">
+        <div class="section-header">
+            <span class="section-number">02</span>
+            <h2 class="section-title">Análises</h2>
+        </div>
+        <p class="section-desc">Estudos analíticos com foco em exploração de dados e geração de insights.</p>
+
+        <div class="wip-grid">
+            <div class="wip-card">
+                <span class="wip-badge">Em breve</span>
+                <h3>Análise Exploratória de Dados</h3>
+                <p>Investigação aprofundada de datasets reais com estatísticas descritivas, visualizações e identificação de padrões.</p>
+                <div class="wip-tags">
+                    <span class="wip-tag">Python</span>
+                    <span class="wip-tag">Pandas</span>
+                    <span class="wip-tag">Matplotlib</span>
+                </div>
+            </div>
+            <div class="wip-card">
+                <span class="wip-badge">Em breve</span>
+                <h3>Análise de Cohort & Retenção</h3>
+                <p>Estudo de comportamento de clientes ao longo do tempo com métricas de retenção e análise de churn.</p>
+                <div class="wip-tags">
+                    <span class="wip-tag">SQL</span>
+                    <span class="wip-tag">Python</span>
+                    <span class="wip-tag">Seaborn</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modelos Data Science -->
+    <section class="section" id="modelos">
+        <div class="section-header">
+            <span class="section-number">03</span>
+            <h2 class="section-title">Modelos de Data Science</h2>
+        </div>
+        <p class="section-desc">Modelos preditivos e algoritmos de machine learning aplicados a problemas reais.</p>
+
+        <div class="wip-grid">
+            <div class="wip-card">
+                <span class="wip-badge">Em breve</span>
+                <h3>Modelo de Previsão de Vendas</h3>
+                <p>Modelo de séries temporais para previsão de demanda utilizando técnicas de machine learning supervisionado.</p>
+                <div class="wip-tags">
+                    <span class="wip-tag">Scikit-learn</span>
+                    <span class="wip-tag">XGBoost</span>
+                    <span class="wip-tag">Time Series</span>
+                </div>
+            </div>
+            <div class="wip-card">
+                <span class="wip-badge">Em breve</span>
+                <h3>Classificação com NLP</h3>
+                <p>Classificação automática de textos utilizando processamento de linguagem natural e deep learning.</p>
+                <div class="wip-tags">
+                    <span class="wip-tag">NLP</span>
+                    <span class="wip-tag">TensorFlow</span>
+                    <span class="wip-tag">Transformers</span>
+                </div>
+            </div>
+            <div class="wip-card">
+                <span class="wip-badge">Em breve</span>
+                <h3>Segmentação de Clientes</h3>
+                <p>Aplicação de clustering não-supervisionado para identificar perfis de clientes e personalizar estratégias.</p>
+                <div class="wip-tags">
+                    <span class="wip-tag">K-Means</span>
+                    <span class="wip-tag">PCA</span>
+                    <span class="wip-tag">Python</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI & Automação -->
+    <section class="section" id="automacao">
+        <div class="section-header">
+            <span class="section-number">04</span>
+            <h2 class="section-title">AI & Automação</h2>
+        </div>
+        <p class="section-desc">Soluções inteligentes com IA generativa, automação de workflows e agentes autônomos.</p>
+
+        <div class="wip-grid">
+            <div class="wip-card">
+                <span class="wip-badge">Em breve</span>
+                <h3>Automação com n8n</h3>
+                <p>Workflows automatizados integrando APIs, bancos de dados e ferramentas de IA para processos end-to-end.</p>
+                <div class="wip-tags">
+                    <span class="wip-tag">n8n</span>
+                    <span class="wip-tag">APIs</span>
+                    <span class="wip-tag">Webhooks</span>
+                </div>
+            </div>
+            <div class="wip-card">
+                <span class="wip-badge">Em breve</span>
+                <h3>AI-Assisted Development</h3>
+                <p>Projetos construídos com Cursor AI e assistentes de código, demonstrando produtividade com ferramentas AI-first.</p>
+                <div class="wip-tags">
+                    <span class="wip-tag">Cursor AI</span>
+                    <span class="wip-tag">LLMs</span>
+                    <span class="wip-tag">Prompt Engineering</span>
+                </div>
+            </div>
+            <div class="wip-card">
+                <span class="wip-badge">Em breve</span>
+                <h3>Agentes Inteligentes</h3>
+                <p>Agentes autônomos que combinam LLMs com ferramentas externas para resolver tarefas complexas de dados.</p>
+                <div class="wip-tags">
+                    <span class="wip-tag">LangChain</span>
+                    <span class="wip-tag">OpenAI</span>
+                    <span class="wip-tag">RAG</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contato">
+        <div class="footer-links">
+            <a href="https://github.com/tcarvalhodiniz" target="_blank">GitHub</a>
+            <a href="https://www.linkedin.com/in/thcarvalhodiniz/" target="_blank">LinkedIn</a>
+            <a href="mailto:th.carvalhodiniz@gmail.com">Email</a>
+        </div>
+        <p class="footer-copy">&copy; 2026 Thiago Corrêa Carvalho Diniz. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        const navbar = document.getElementById('navbar');
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 20);
+        });
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('open');
+        });
+
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => navLinks.classList.remove('open'));
+        });
+
+        const sections = document.querySelectorAll('section[id]');
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY + 100;
+            sections.forEach(section => {
+                const top = section.offsetTop;
+                const height = section.offsetHeight;
+                const id = section.getAttribute('id');
+                const link = navLinks.querySelector(`a[href="#${id}"]`);
+                if (link) {
+                    link.classList.toggle('active', scrollY >= top && scrollY < top + height);
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>
