@@ -3,7 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfólio | Thiago Diniz</title>
+    <title>Portfólio | Thiago Diniz — Data & AI</title>
+    <meta name="description" content="Portfólio de Data Analytics e AI de Thiago Corrêa Carvalho Diniz. Dashboards interativos, análises de dados e modelos de Data Science.">
+
+    <!-- Open Graph (preview no LinkedIn, WhatsApp, etc) -->
+    <meta property="og:title" content="Portfólio | Thiago Diniz — Data & AI">
+    <meta property="og:description" content="Dashboards interativos, análises de dados e modelos de Data Science.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.thiagocarvalhodiniz.com.br">
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect x='3' y='18' width='6' height='11' rx='1' fill='%233b82f6'/><rect x='13' y='10' width='6' height='19' rx='1' fill='%238b5cf6'/><rect x='23' y='3' width='6' height='26' rx='1' fill='%2310b981'/></svg>">
@@ -270,11 +277,15 @@
         .tech-python { background: #d1ecf1; color: #0c5460; }
 
         .dashboard-frame {
-            height: 75vh;
-            min-height: 500px;
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
         }
 
         .dashboard-frame iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
             border: none;
@@ -410,7 +421,7 @@
             .hero .subtitle { font-size: 1rem; }
             .section { padding: 3rem 1rem; }
             .section-title { font-size: 1.35rem; }
-            .dashboard-frame { height: 60vh; min-height: 350px; }
+            .dashboard-frame { aspect-ratio: 4 / 3; }
             .wip-grid { grid-template-columns: 1fr; }
 
             .nav-links {
@@ -613,8 +624,8 @@
     <!-- Footer -->
     <footer id="contato">
         <div class="footer-links">
-            <a href="https://github.com/tcarvalhodiniz" target="_blank">GitHub</a>
-            <a href="https://www.linkedin.com/in/thcarvalhodiniz/" target="_blank">LinkedIn</a>
+            <a href="https://github.com/tcarvalhodiniz" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="https://www.linkedin.com/in/thcarvalhodiniz/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
             <a href="mailto:th.carvalhodiniz@gmail.com">Email</a>
         </div>
         <p class="footer-copy">&copy; 2026 Thiago Corrêa Carvalho Diniz. Todos os direitos reservados.</p>
